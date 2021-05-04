@@ -12,11 +12,12 @@ export class HttpService {
 
     constructor() {
         this.instance = axios.create({
-            baseURL: "https://13.124.3.122:8443/",
+            baseURL: "http://13.124.3.122:8000/",
             headers: {
                 "Cache-Control": "no-cache",
                 "Content-Type": "application/json;charset=utf-8",
                 "Access-Control-Allow-Origin": "*",
+                Credential: true,
             },
             adapter: throttleAdapterEnhancer(
                 cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)
@@ -25,10 +26,10 @@ export class HttpService {
             transformResponse: this.getTransformResponse(),
         })
 
-        axios.defaults.headers["Content-Type"] =
-            "application/json;charset=utf-8"
-        axios.defaults.headers["Access-Control-Allow-Origin"] = "*"
-        axios.defaults.headers["Access-Control-Allow-Headers"] = "*"
+        // axios.defaults.headers["Content-Type"] =
+        //     "application/json;charset=utf-8"
+        // axios.defaults.headers["Access-Control-Allow-Origin"] = "*"
+        // axios.defaults.headers["Access-Control-Allow-Headers"] = "*"
     }
 
     public getInstance() {
