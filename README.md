@@ -1,24 +1,27 @@
-# artist-place
+# README(FRONT)
 
-## Project setup
-```
-yarn install
-```
+# Project
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+**Name** - Musician Place(가제)
 
-### Compiles and minifies for production
-```
-yarn build
-```
+**subtitle** - 뮤지션을 위한 장소
 
-### Lints and fixes files
-```
-yarn lint
-```
+# Development **Info**
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Language : TypeScript, JavaScript
+- Framwork : Vue Framework
+- OS : Windows
+- IDE : Visual Code (March 2021 (version 1.55))
+
+# **Contact**
+
+Github : [https://github.com/201402407](https://github.com/201402407)
+
+Linkedin : https://[www.linkedin.com/in/leehaewon](http://www.linkedin.com/in/leehaewon)
+
+Blog : [https://maivve.tistory.com](https://maivve.tistory.com/)
+
+# Versioning
+
+# **License**
+
