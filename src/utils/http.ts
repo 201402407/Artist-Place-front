@@ -14,7 +14,7 @@ export class HttpService {
         this.instance = axios.create({
             baseURL: "http://13.124.3.122:8000/",
             headers: {
-                "Content-Type": "charset=utf-8",
+                "Content-Type": "application/json;charset=utf-8",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": "http://13.124.3.122:8000",
                 "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
