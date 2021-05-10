@@ -1,9 +1,4 @@
-import axios, {
-    AxiosInstance,
-    AxiosRequestConfig,
-    AxiosTransformer,
-    AxiosAdapter,
-} from "axios"
+import axios, { AxiosInstance, AxiosTransformer, AxiosAdapter } from "axios"
 import { cacheAdapterEnhancer, throttleAdapterEnhancer } from "axios-extensions"
 
 export class HttpService {

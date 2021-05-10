@@ -7,12 +7,7 @@ import {
     Mutation,
     Action,
 } from "vuex-module-decorators"
-import RestSample, {
-    LoginPVO,
-    LoginRVO,
-    CountRVO,
-} from "@/services/main/restSample"
-import { AxiosResponse } from "axios"
+import RestSample, { LoginPVO, CountRVO } from "@/services/main/restSample"
 
 @Module({ dynamic: true, name: "mainStore", namespaced: true, store })
 export default class MainStore extends VuexModule {

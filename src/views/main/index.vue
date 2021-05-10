@@ -1,6 +1,8 @@
 <template>
     <div>
         <h1>{{ result }}</h1>
+        <input v-model="pvo.id" type="text" placeholder="ID 입력" /><br />
+        <input v-model="pwd" type="password" placeholder="PWD 입력" /><br />
         <button @click="clickBtn">버튼클릭하래</button><br />
         <button @click="clickBtn2">getCount</button><br />
         <h2>{{ count }}</h2>
@@ -11,6 +13,7 @@
 import { MainModule } from "@/stores/modules/main/index"
 import RestSample, { LoginPVO } from "@/services/main/restSample"
 import { Vue, Component } from "vue-property-decorator"
+import CryptoJS from "crypto-js"
 
 @Component
 export default class Main extends Vue {
@@ -19,15 +22,20 @@ export default class Main extends Vue {
     private count = 0
     private result = {}
     private restSample = new RestSample()
-
+    private pwd = ""
     private pvo: LoginPVO = {
-        id: "test",
-        hashPwd: "test",
+        id: "",
+        hashPwd: "",
     }
 
     async clickBtn() {
+        this.pvo.hashPwd = this.hashing(this.pwd)
         const rvo = await MainModule.chkLogin(this.pvo)
         console.log(rvo)
+    }
+
+    private hashing(str: string) {
+        return CryptoJS.SHA256(str).toString()
     }
 
     async clickBtn2() {
