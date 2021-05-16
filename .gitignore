@@ -174,4 +174,25 @@ yarn-error.log
 # and uncomment the following lines
 # .pnp.*
 
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+package-lock.json
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
 # End of https://www.toptal.com/developers/gitignore/api/vue,vuejs,node,yarn,visualstudiocode
