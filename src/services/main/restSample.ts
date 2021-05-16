@@ -7,8 +7,8 @@ interface Status {
     message: string
 }
 export interface LoginPVO {
-    id: string
-    hashPwd: string
+    emailId: string
+    pwd: string
 }
 
 export interface LoginRVO {

@@ -30,7 +30,7 @@ export default class MainStore extends VuexModule {
 
     @Mutation
     setLoginInfos(loginPVO: LoginPVO) {
-        this.loginId = loginPVO.id
+        this.loginId = loginPVO.emailId
     }
 
     @Mutation

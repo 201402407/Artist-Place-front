@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ result }}</h1>
-        <input v-model="pvo.id" type="text" placeholder="ID 입력" /><br />
+        <input v-model="pvo.emailId" type="text" placeholder="ID 입력" /><br />
         <input v-model="pwd" type="password" placeholder="PWD 입력" /><br />
         <button @click="clickBtn">버튼클릭하래</button><br />
         <button @click="clickBtn2">getCount</button><br />
@@ -24,12 +24,12 @@ export default class Main extends Vue {
     private restSample = new RestSample()
     private pwd = ""
     private pvo: LoginPVO = {
-        id: "",
-        hashPwd: "",
+        emailId: "",
+        pwd: "",
     }
 
     async clickBtn() {
-        this.pvo.hashPwd = this.hashing(this.pwd)
+        this.pvo.pwd = this.hashing(this.pwd)
         const rvo = await MainModule.chkLogin(this.pvo)
         console.log(rvo)
     }
