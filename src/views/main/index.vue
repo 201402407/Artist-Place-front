@@ -3,8 +3,9 @@
     <h1>{{ result }}</h1>
     <input v-model="pvo.emailId" type="text" placeholder="ID 입력" /><br />
     <input v-model="pwdInput" type="password" placeholder="PWD 입력" /><br />
-    <button @click="clickBtn">버튼클릭하래</button><br />
-    <button @click="clickBtn2">getCount</button><br />
+    <button @click="clickLogin" @keyup.enter="clickLogin">로그인</button
+    ><br /><br />
+    <button @click="clickBtn2">getCount 서버 연결 테스트</button><br />
     <h2>{{ count }}</h2>
   </div>
 </template>
@@ -17,24 +18,21 @@ import CryptoJS from "crypto-js"
 
 @Component
 export default class Main extends Vue {
-  private testNum = 0
-  private testName = ""
-  private count = 0
+  private count = ""
   private pwdInput = ""
-  private result = {}
-  private restSample = new RestSample()
   private pvo: LoginPVO = {
     emailId: "",
     pwd: "",
   }
 
-  mounted() {
-    console.log(process.env.VUE_APP_BASE_URL)
-  }
-  async clickBtn() {
+  async clickLogin() {
     this.pvo.pwd = this.hashing(this.pwdInput)
-    const rvo = await MainModule.chkLogin(this.pvo)
-    console.log(rvo)
+    await MainModule.chkLogin(this.pvo)
+    if (MainModule.loginResult) {
+      alert("로그인 성공!")
+    } else {
+      alert("로그인 실패!")
+    }
   }
 
   private hashing(str: string) {
@@ -44,7 +42,7 @@ export default class Main extends Vue {
   async clickBtn2() {
     const rvo = await MainModule.getCount()
     console.log(rvo)
-    this.count = rvo.data.count
+    this.count = rvo.data.count === undefined ? "" : rvo.data.count
   }
 }
 </script>

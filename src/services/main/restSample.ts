@@ -17,8 +17,8 @@ export interface LoginRVO {
 }
 
 export interface CountRVO {
-  status?: Status
-  count: number
+  status: Status
+  count?: string
 }
 
 // 서비스 로직 단 구현
