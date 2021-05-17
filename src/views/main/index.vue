@@ -28,6 +28,9 @@ export default class Main extends Vue {
     pwd: "",
   }
 
+  mounted() {
+    console.log(process.env.VUE_APP_BASE_URL)
+  }
   async clickBtn() {
     this.pvo.pwd = this.hashing(this.pwdInput)
     const rvo = await MainModule.chkLogin(this.pvo)
