@@ -1,8 +1,8 @@
-import { HttpService, RestServiceResponse } from '@/utils/http'
+import { HttpService, RestServiceResponse } from "@/utils/http"
 // import { AxiosResponse } from "axios"
 
 interface Status {
-    code: string
+    code: number
     codeMsg: string
     message: string
 }
@@ -14,6 +14,7 @@ export interface LoginPVO {
 export interface LoginRVO {
     Status?: Status
     result?: string
+    nickname?: string
 }
 
 export interface CountRVO {
@@ -25,10 +26,10 @@ export interface CountRVO {
 export default class RestSample extends HttpService {
     // 로그인
     async login(pvo: LoginPVO): Promise<LoginRVO> {
-        return await this.getInstance().post('api/common/login', pvo)
+        return await this.getInstance().post("api/common/login", pvo)
     }
 
     async getCount(): Promise<RestServiceResponse<CountRVO>> {
-        return await this.getInstance().get('api/getCount')
+        return await this.getInstance().get("api/getCount")
     }
 }

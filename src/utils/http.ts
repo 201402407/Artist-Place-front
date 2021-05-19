@@ -1,10 +1,10 @@
 import axios, {
     AxiosInstance,
-    AxiosRequestConfig,
-    AxiosTransformer,
+    // AxiosRequestConfig,
+    // AxiosTransformer,
     AxiosAdapter,
-} from 'axios'
-import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions'
+} from "axios"
+import { cacheAdapterEnhancer, throttleAdapterEnhancer } from "axios-extensions"
 
 // eslint-disable-next-line no-unused-vars
 export type ResponseAdapterType = (data: any, headers?: any) => {}
@@ -18,16 +18,16 @@ export class HttpService {
         this.instance = axios.create({
             baseURL: process.env.VUE_APP_API_URL,
             headers: {
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'application/json;charset=utf-8',
-                'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Origin': process.env.VUE_APP_API_URL,
+                "Cache-Control": "no-cache",
+                "Content-Type": "application/json;charset=utf-8",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": process.env.VUE_APP_API_URL,
             },
             adapter: throttleAdapterEnhancer(
                 cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)
             ),
             withCredentials: true,
-            transformResponse: this.getTransformResponse(),
+            // transformResponse: this.getTransformResponse(),
         })
         // axios.defaults.headers["Content-Type"] =
         //     "application/json;charset=utf-8"
@@ -50,46 +50,46 @@ export class HttpService {
     public getInstance() {
         return this.instance
     }
-    private getTransformResponse(): AxiosTransformer {
-        return (data: any) => {
-            try {
-                const _data = JSON.parse(data)
-                return {
-                    ..._data,
-                }
-            } catch (error) {
-                return {}
-            }
-        }
-    }
+    // private getTransformResponse(): AxiosTransformer {
+    //     return (data: any) => {
+    //         try {
+    //             const _data = JSON.parse(data)
+    //             return {
+    //                 ..._data,
+    //             }
+    //         } catch (error) {
+    //             return {}
+    //         }
+    //     }
+    // }
 
-    public async request<T>(
-        config: AxiosRequestConfig,
-        responseAdapter?: ResponseAdapterType
-    ): Promise<T> {
-        const {
-            transformResponse: defaultTransformResponse,
-        } = this.instance.defaults
-        const transformResponse: AxiosTransformer[] = [
-            defaultTransformResponse as AxiosTransformer,
-        ]
+    // public async request<T>(
+    //     config: AxiosRequestConfig,
+    //     responseAdapter?: ResponseAdapterType
+    // ): Promise<T> {
+    //     const {
+    //         transformResponse: defaultTransformResponse,
+    //     } = this.instance.defaults
+    //     const transformResponse: AxiosTransformer[] = [
+    //         defaultTransformResponse as AxiosTransformer,
+    //     ]
 
-        if (responseAdapter) {
-            transformResponse.push(responseAdapter)
-        }
+    //     if (responseAdapter) {
+    //         transformResponse.push(responseAdapter)
+    //     }
 
-        let response: any = null
-        try {
-            response = await this.instance.request<T>({
-                ...config,
-                transformResponse,
-            })
+    //     let response: any = null
+    //     try {
+    //         response = await this.instance.request<T>({
+    //             ...config,
+    //             transformResponse,
+    //         })
 
-            // 공통 응답처리
-            return response && response.data
-        } catch (error) {
-            console.log('request error : ', error)
-            throw response
-        }
-    }
+    //         // 공통 응답처리
+    //         return response && response.data
+    //     } catch (error) {
+    //         console.log('request error : ', error)
+    //         throw response
+    //     }
+    // }
 }
