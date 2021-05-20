@@ -1,17 +1,7 @@
 import store from "@/stores/index"
 
-import {
-    getModule,
-    Module,
-    VuexModule,
-    Mutation,
-    Action,
-} from "vuex-module-decorators"
-import RestSample, {
-    LoginPVO,
-    LoginRVO,
-    CountRVO,
-} from "@/services/main/restSample"
+import { getModule, Module, VuexModule, Mutation, Action } from "vuex-module-decorators"
+import RestSample, { LoginPVO, LoginRVO, CountRVO } from "@/services/main/restSample"
 
 @Module({ dynamic: true, name: "mainStore", namespaced: true, store })
 export default class MainStore extends VuexModule {
@@ -37,11 +27,10 @@ export default class MainStore extends VuexModule {
     @Mutation
     setLoginInfos(loginRVO: LoginRVO) {
         if (loginRVO.Status?.code === 200) {
-            if (loginRVO.result === "1") {
+            if (loginRVO.rvo?.result === "1") {
                 // 로그인 성공
                 this.loginResult = true
-                this.nickname =
-                    loginRVO.nickname === "undefined" ? "" : loginRVO.nickname
+                this.nickname = loginRVO.rvo?.nickname === "undefined" ? "" : loginRVO.rvo?.nickname
             } else {
                 this.loginResult = false
             }

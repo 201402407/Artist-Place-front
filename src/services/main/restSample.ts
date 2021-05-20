@@ -11,10 +11,14 @@ export interface LoginPVO {
     pwd: string
 }
 
-export interface LoginRVO {
-    Status?: Status
+export interface LoginResult {
     result?: string
     nickname?: string
+}
+
+export interface LoginRVO {
+    Status?: Status
+    rvo?: LoginResult
 }
 
 export interface CountRVO {
