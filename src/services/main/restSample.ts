@@ -13,6 +13,7 @@ export interface LoginPVO {
 
 export interface LoginResult {
     result?: string
+    emailId?: string
     nickname?: string
 }
 
