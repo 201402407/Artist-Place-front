@@ -1,26 +1,32 @@
-import VueRouter, { RouteConfig } from "vue-router"
-import Vue from "vue"
-import Main from "@/views/main/index.vue"
-import Home from "@/views/home/index.vue"
+import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from 'vue'
+import Main from '@/views/main/index.vue'
+import Home from '@/views/home/index.vue'
+import RegistNickname from '@/views/main/regist-nickname/index.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     {
-        path: "/main",
-        name: "Main",
+        path: '/main',
+        name: 'Main',
         component: Main,
     },
     {
-        path: "/",
-        name: "Home",
+        path: '/main/regist-nickname',
+        name: 'RegistNickname',
+        component: RegistNickname,
+    },
+    {
+        path: '/',
+        name: 'Home',
         component: Home,
     },
 ]
 
 const router = new VueRouter({
-    mode: "history",
-    base: "/",
+    mode: 'history',
+    base: '/',
     routes,
 })
 

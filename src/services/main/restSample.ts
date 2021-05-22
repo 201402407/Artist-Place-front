@@ -1,4 +1,4 @@
-import { HttpService, RestServiceResponse } from "@/utils/http"
+import { HttpService, RestServiceResponse } from '@/utils/http'
 // import { AxiosResponse } from "axios"
 
 interface Status {
@@ -9,6 +9,11 @@ interface Status {
 export interface LoginPVO {
     emailId: string
     pwd: string
+}
+
+export interface RegistNicknamePVO {
+    emailId: string
+    nickname: string
 }
 
 export interface LoginResult {
@@ -22,6 +27,11 @@ export interface LoginRVO {
     rvo?: LoginResult
 }
 
+export interface RegistNicknameRVO {
+    Status?: Status
+    nickname?: string
+}
+
 export interface CountRVO {
     Status: Status
     count?: string
@@ -31,10 +41,15 @@ export interface CountRVO {
 export default class RestSample extends HttpService {
     // 로그인
     async login(pvo: LoginPVO): Promise<LoginRVO> {
-        return await this.getInstance().post("api/common/login", pvo)
+        return await this.getInstance().post('api/common/login', pvo)
+    }
+
+    // 닉네임 설정(추가)
+    async registNickname(pvo: RegistNicknamePVO): Promise<RegistNicknameRVO> {
+        return await this.getInstance().post('api/common/registNickname', pvo)
     }
 
     async getCount(): Promise<RestServiceResponse<CountRVO>> {
-        return await this.getInstance().get("api/getCount")
+        return await this.getInstance().get('api/getCount')
     }
 }
