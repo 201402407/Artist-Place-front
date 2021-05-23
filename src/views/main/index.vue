@@ -2,8 +2,8 @@
 <template>
     <div>
         <input v-model="pvo.emailId" type="text" placeholder="ID 입력" /><br />
-        <input v-model="pwdInput" type="password" placeholder="PWD 입력" /><br />
-        <button @click="clickLogin" @keyup.enter="clickLogin">로그인</button><br /><br />
+        <input v-model="pwdInput" type="password" placeholder="PWD 입력" @keyup.enter="clickLogin" /><br />
+        <button @click="clickLogin">로그인</button><br /><br />
         <h1>{{ loginResultMsg }}</h1>
         <br /><br />
         <button @click="clickNicknameBtn" v-show="this.checkMyNicknameResult">닉네임 생성하기</button><br />
@@ -36,10 +36,6 @@ export default class Main extends Vue {
         return MainModule.loginResult
     }
 
-    get checkMyNicknameResult() {
-        return (this.nickname === 'undefined' || this.nickname === '') && this.loginResultMsg != ''
-    }
-
     get nickname() {
         return MainModule.nickname
     }
@@ -51,6 +47,12 @@ export default class Main extends Vue {
         if (this.loginResult) {
             MainModule.setLoginId(this.pvo.emailId)
         }
+
+        this.pwdInput = ''
+    }
+
+    get checkMyNicknameResult() {
+        return (this.nickname === '' || !this.nickname) && this.loginResultMsg != ''
     }
 
     // 닉네임 생성 화면으로 이동

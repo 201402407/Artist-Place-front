@@ -13,7 +13,6 @@ export default class MainStore extends VuexModule {
 
     @Action({ commit: 'setLoginInfos', rawError: true })
     async chkLogin(pvo: LoginPVO) {
-        console.log(pvo.emailId)
         return await this.restSample.login(pvo) // 여긴 서버 API 통신 함수 호출
     }
 

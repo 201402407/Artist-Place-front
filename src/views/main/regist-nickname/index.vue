@@ -3,7 +3,7 @@
     <div>
         <input v-model="pvo.nickname" type="text" placeholder="닉네임 입력" /><br />
         <button @click="clickRegistNickname">닉네임 생성</button><br /><br />
-        <h1>{{ loginResultMsg }}</h1>
+        <!-- <h1>{{ loginResultMsg }}</h1> -->
         <br /><br />
     </div>
 </template>
@@ -16,7 +16,7 @@ import { RegistNicknamePVO } from '@/services/main/restSample'
 @Component
 export default class RegistNickname extends Vue {
     private pvo: RegistNicknamePVO = {
-        emailId: '',
+        emailId: MainModule.loginId,
         nickname: '',
     }
 
