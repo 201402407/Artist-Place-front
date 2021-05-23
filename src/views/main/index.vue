@@ -28,13 +28,17 @@ export default class Main extends Vue {
         pwd: '',
     }
 
+    get countResult() {
+        return MainModule.count
+    }
+
     get loginResult() {
         return MainModule.loginResult
     }
 
-    // get checkMyNicknameResult() {
-    //     this.loginResult === true
-    // }
+    get checkMyNicknameResult() {
+        return (this.nickname === 'undefined' || this.nickname === '') && this.loginResultMsg != ''
+    }
 
     get nickname() {
         return MainModule.nickname
@@ -56,8 +60,8 @@ export default class Main extends Vue {
 
     async clickBtn2() {
         await MainModule.getCount()
-        console.log(MainModule.getResultCount)
-        this.count = MainModule.getResultCount === undefined ? '' : MainModule.getResultCount
+        console.log(this.countResult)
+        this.count = this.countResult === undefined ? '' : this.countResult
     }
 }
 </script>

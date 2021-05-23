@@ -26,6 +26,8 @@ export default class RegistNickname extends Vue {
 
     async clickRegistNickname() {
         await MainModule.registNickname(this.pvo)
+        console.log(this.nickname)
+        console.log(MainModule.nickname)
         // this.loginResultMsg = this.loginResult ? '로그인 성공' : '로그인 실패'
     }
 }

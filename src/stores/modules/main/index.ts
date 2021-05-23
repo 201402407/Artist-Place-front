@@ -8,8 +8,8 @@ export default class MainStore extends VuexModule {
     private restSample = new RestSample()
     loginResult = false
     nickname? = ''
-    private loginId = ''
-    private count = ''
+    loginId = ''
+    count = ''
 
     @Action({ commit: 'setLoginInfos', rawError: true })
     async chkLogin(pvo: LoginPVO) {
@@ -57,18 +57,6 @@ export default class MainStore extends VuexModule {
     @Mutation
     setLoginId(id: string) {
         this.loginId = id
-    }
-
-    get getLoginId() {
-        return this.loginId
-    }
-
-    get getResultCount() {
-        return this.count
-    }
-
-    get getNickname() {
-        return this.nickname
     }
 }
 

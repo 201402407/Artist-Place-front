@@ -18,10 +18,12 @@ export class HttpService {
         this.instance = axios.create({
             baseURL: process.env.VUE_APP_API_URL,
             headers: {
-                "Cache-Control": "no-cache",
-                "Content-Type": "application/json;charset=utf-8",
-                "Access-Control-Allow-Headers": "Content-Type",
+                // "Cache-Control": "no-cache",
+                "Content-Type": "application/json",
+                // "Content-Type": "application/json;charset=utf-8",
+                "Access-Control-Allow-Headers": "Content-Type, Accept, X-Requested-With",
                 "Access-Control-Allow-Origin": process.env.VUE_APP_API_URL,
+                // "Access-Control-Allow-Origin": "*",
             },
             adapter: throttleAdapterEnhancer(
                 cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)
