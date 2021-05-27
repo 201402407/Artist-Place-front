@@ -6,15 +6,17 @@
         <button @click="clickLogin">로그인</button><br /><br />
         <h1>{{ loginResultMsg }}</h1>
         <br /><br />
-        <button @click="clickNicknameBtn" v-show="this.checkMyNicknameResult">닉네임 생성하기</button><br />
+        <button @click="clickNicknameBtn" v-show="this.checkMyNicknameResult">
+            닉네임 생성하기</button
+        ><br />
         <button @click="clickBtn2">getCount 서버 연결 테스트</button><br />
         <h2>{{ count }}</h2>
     </div>
 </template>
 
 <script lang="ts">
-import { MainModule } from '@/stores/modules/main/index'
-import { LoginPVO } from '@/services/main/restSample'
+import { LoginModule } from '@/stores/modules/main/login'
+import { LoginPVO } from '@/services/main/login'
 import { Vue, Component } from 'vue-property-decorator'
 import { EnvUtils } from '@/utils/envUtils'
 
@@ -29,23 +31,23 @@ export default class Main extends Vue {
     }
 
     get countResult() {
-        return MainModule.count
+        return LoginModule.count
     }
 
     get loginResult() {
-        return MainModule.loginResult
+        return LoginModule.loginResult
     }
 
     get nickname() {
-        return MainModule.nickname
+        return LoginModule.nickname
     }
 
     async clickLogin() {
         this.pvo.pwd = EnvUtils.hashing(this.pwdInput)
-        await MainModule.chkLogin(this.pvo)
+        await LoginModule.chkLogin(this.pvo)
         this.loginResultMsg = this.loginResult ? '로그인 성공' : '로그인 실패'
         if (this.loginResult) {
-            MainModule.setLoginId(this.pvo.emailId)
+            LoginModule.setLoginId(this.pvo.emailId)
         }
 
         this.pwdInput = ''
@@ -61,7 +63,7 @@ export default class Main extends Vue {
     }
 
     async clickBtn2() {
-        await MainModule.getCount()
+        await LoginModule.getCount()
         console.log(this.countResult)
         this.count = this.countResult === undefined ? '' : this.countResult
     }

@@ -3,11 +3,17 @@ import axios, {
     // AxiosRequestConfig,
     // AxiosTransformer,
     AxiosAdapter,
-} from "axios"
-import { cacheAdapterEnhancer, throttleAdapterEnhancer } from "axios-extensions"
+} from 'axios'
+import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions'
 
 // eslint-disable-next-line no-unused-vars
 export type ResponseAdapterType = (data: any, headers?: any) => {}
+
+export interface Status {
+    code: number
+    codeMsg: string
+    message: string
+}
 
 export type RestServiceResponse<T> = Promise<T | null>
 export class HttpService {
@@ -19,15 +25,13 @@ export class HttpService {
             baseURL: process.env.VUE_APP_API_URL,
             headers: {
                 // "Cache-Control": "no-cache",
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 // "Content-Type": "application/json;charset=utf-8",
-                "Access-Control-Allow-Headers": "Content-Type, Accept, X-Requested-With",
-                "Access-Control-Allow-Origin": process.env.VUE_APP_API_URL,
+                'Access-Control-Allow-Headers': 'Content-Type, Accept, X-Requested-With',
+                'Access-Control-Allow-Origin': process.env.VUE_APP_API_URL,
                 // "Access-Control-Allow-Origin": "*",
             },
-            adapter: throttleAdapterEnhancer(
-                cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)
-            ),
+            adapter: throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)),
             withCredentials: true,
             // transformResponse: this.getTransformResponse(),
         })
@@ -52,6 +56,7 @@ export class HttpService {
     public getInstance() {
         return this.instance
     }
+
     // private getTransformResponse(): AxiosTransformer {
     //     return (data: any) => {
     //         try {

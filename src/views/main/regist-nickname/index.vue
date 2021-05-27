@@ -9,26 +9,27 @@
 </template>
 
 <script lang="ts">
-import { MainModule } from '@/stores/modules/main/index'
+import { NicknameModule } from '@/stores/modules/main/nickname'
+import { LoginModule } from '@/stores/modules/main/login'
 import { Vue, Component } from 'vue-property-decorator'
-import { RegistNicknamePVO } from '@/services/main/restSample'
+import { RegistNicknamePVO } from '@/services/main/nickname'
 
 @Component
 export default class RegistNickname extends Vue {
     private pvo: RegistNicknamePVO = {
-        emailId: MainModule.loginId,
+        emailId: LoginModule.loginId,
         nickname: '',
     }
 
     get nickname() {
-        return MainModule.nickname
+        return NicknameModule.nickname
     }
 
     async clickRegistNickname() {
-        await MainModule.registNickname(this.pvo)
-        console.log(this.nickname)
-        console.log(MainModule.nickname)
-        // this.loginResultMsg = this.loginResult ? '로그인 성공' : '로그인 실패'
+        await NicknameModule.registNickname(this.pvo)
+        if (NicknameModule.status.code === 200) {
+            LoginModule.setNickname(NicknameModule.nickname)
+        }
     }
 }
 </script>

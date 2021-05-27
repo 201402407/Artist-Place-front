@@ -1,11 +1,11 @@
 import store from '@/stores/index'
 
 import { getModule, Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import RestSample, { LoginPVO, RegistNicknamePVO, LoginRVO, RegistNicknameRVO, CountRVO } from '@/services/main/restSample'
+import LoginService, { LoginPVO, LoginRVO, CountRVO } from '@/services/main/login'
 
-@Module({ dynamic: true, name: 'mainStore', namespaced: true, store })
-export default class MainStore extends VuexModule {
-    private restSample = new RestSample()
+@Module({ dynamic: true, name: 'loginStore', namespaced: true, store })
+export default class LoginStore extends VuexModule {
+    private loginService = new LoginService()
     loginResult = false
     nickname? = ''
     loginId = ''
@@ -13,17 +13,12 @@ export default class MainStore extends VuexModule {
 
     @Action({ commit: 'setLoginInfos', rawError: true })
     async chkLogin(pvo: LoginPVO) {
-        return await this.restSample.login(pvo) // 여긴 서버 API 통신 함수 호출
+        return await this.loginService.login(pvo) // 여긴 서버 API 통신 함수 호출
     }
 
     @Action({ commit: 'setCounts', rawError: true })
     async getCount() {
-        return await this.restSample.getCount() // 여긴 서버 API 통신 함수 호출
-    }
-
-    @Action({ commit: 'setNicknameInfos', rawError: true })
-    async registNickname(pvo: RegistNicknamePVO) {
-        return await this.restSample.registNickname(pvo) // 여긴 서버 API 통신 함수 호출
+        return await this.loginService.getCount() // 여긴 서버 API 통신 함수 호출
     }
 
     @Mutation
@@ -36,15 +31,8 @@ export default class MainStore extends VuexModule {
             } else {
                 this.loginResult = false
             }
-        }
-    }
-
-    @Mutation
-    setNicknameInfos(registNicknameRVO: RegistNicknameRVO) {
-        if (registNicknameRVO.Status?.code === 200) {
-            this.nickname = registNicknameRVO.nickname === 'undefined' ? '' : registNicknameRVO.nickname
         } else {
-            this.nickname = ''
+            this.loginResult = false
         }
     }
 
@@ -57,6 +45,11 @@ export default class MainStore extends VuexModule {
     setLoginId(id: string) {
         this.loginId = id
     }
+
+    @Mutation
+    setNickname(nickname?: string) {
+        this.nickname = nickname
+    }
 }
 
-export const MainModule = getModule(MainStore)
+export const LoginModule = getModule(LoginStore)
