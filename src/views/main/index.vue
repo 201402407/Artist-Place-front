@@ -59,6 +59,7 @@ export default class Main extends Vue {
 
     // 닉네임 생성 화면으로 이동
     clickNicknameBtn() {
+        this.$router.push({ name: 'regist-nickname' })
         this.$router.push('/main/regist-nickname')
     }
 

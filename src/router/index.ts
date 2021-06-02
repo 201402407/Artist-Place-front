@@ -14,7 +14,7 @@ const routes: Array<RouteConfig> = [
     },
     {
         path: '/main/regist-nickname',
-        name: 'RegistNickname',
+        name: 'regist-nickname',
         component: RegistNickname,
     },
     {
