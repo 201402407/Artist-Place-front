@@ -1,5 +1,4 @@
 import store from '@/stores/index'
-
 import { getModule, Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import NicknameService, { RegistNicknamePVO, RegistNicknameRVO } from '@/services/main/nickname'
 import { Status } from '@/utils/http'
