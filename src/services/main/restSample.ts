@@ -16,6 +16,12 @@ export interface RegistNicknamePVO {
     nickname: string
 }
 
+export interface GetQuestionListPVO {
+    type: number
+    state: number
+}
+
+
 export interface LoginResult {
     result?: string
     emailId?: string
@@ -37,6 +43,17 @@ export interface CountRVO {
     count?: string
 }
 
+export interface GetQuestionListRVO {
+    Status: Status
+    questionList: QuestionVO[]
+}
+
+export interface QuestionVO {
+    type: number,
+    problemName: string,
+    state: number
+}
+
 // 서비스 로직 단 구현
 export default class RestSample extends HttpService {
     // 로그인
@@ -51,5 +68,9 @@ export default class RestSample extends HttpService {
 
     async getCount(): Promise<RestServiceResponse<CountRVO>> {
         return await this.getInstance().get('api/getCount')
+    }
+
+    async getQuestionList(pvo: GetQuestionListPVO): Promise<RestServiceResponse<GetQuestionListRVO>> {
+        return await this.getInstance().post('api/common/getQuestionList', pvo)
     }
 }

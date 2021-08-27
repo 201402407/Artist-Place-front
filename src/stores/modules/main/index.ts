@@ -1,7 +1,7 @@
 import store from '@/stores/index'
 
 import { getModule, Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import RestSample, { LoginPVO, RegistNicknamePVO, LoginRVO, RegistNicknameRVO, CountRVO } from '@/services/main/restSample'
+import RestSample, { LoginPVO, RegistNicknamePVO, LoginRVO, RegistNicknameRVO, CountRVO, GetQuestionListPVO, GetQuestionListRVO, QuestionVO } from '@/services/main/restSample'
 
 @Module({ dynamic: true, name: 'mainStore', namespaced: true, store })
 export default class MainStore extends VuexModule {
@@ -10,6 +10,8 @@ export default class MainStore extends VuexModule {
     nickname? = ''
     loginId = ''
     count = ''
+
+    questionList: QuestionVO[] = []
 
     @Action({ commit: 'setLoginInfos', rawError: true })
     async chkLogin(pvo: LoginPVO) {
@@ -24,6 +26,11 @@ export default class MainStore extends VuexModule {
     @Action({ commit: 'setNicknameInfos', rawError: true })
     async registNickname(pvo: RegistNicknamePVO) {
         return await this.restSample.registNickname(pvo) // 여긴 서버 API 통신 함수 호출
+    }
+
+    @Action({ commit: 'getQuestionListInfos', rawError: true })
+    async getQuestionList(pvo: GetQuestionListPVO) {
+        return await this.restSample.getQuestionList(pvo)
     }
 
     @Mutation
@@ -47,6 +54,17 @@ export default class MainStore extends VuexModule {
             this.nickname = ''
         }
     }
+
+    @Mutation
+    getQuestionListInfos(rvo: GetQuestionListRVO) {
+        if (rvo.Status?.code === 200) {
+            this.questionList = rvo.questionList
+        }
+        else {
+            console.log(`getQuestionList API RESULT :: ${rvo.Status.code}`)
+        }
+    }
+
 
     @Mutation
     setCounts(countRVO: CountRVO) {
