@@ -1,4 +1,4 @@
-import { HttpService, RestServiceResponse, Status } from '@/utils/http'
+import { HttpService, RestServiceResponse, CommonHTTPStatus, Status } from '@/utils/http'
 // import { AxiosResponse } from "axios"
 
 export interface LoginPVO {
@@ -16,6 +16,11 @@ export interface GetQuestionListPVO {
     state: number
 }
 
+export interface AddQuestionPVO {
+    type: number
+    problemName: string
+    state?: number
+}
 
 export interface LoginResult {
     result?: string
@@ -39,8 +44,8 @@ export interface GetQuestionListRVO {
 }
 
 export interface QuestionVO {
-    type: number,
-    problemName: string,
+    type: number
+    problemName: string
     state: number
 }
 
@@ -57,5 +62,9 @@ export default class LoginService extends HttpService {
 
     async getQuestionList(pvo: GetQuestionListPVO): Promise<RestServiceResponse<GetQuestionListRVO>> {
         return await this.getInstance().post('api/common/getQuestionList', pvo)
+    }
+
+    async addQuestion(pvo: AddQuestionPVO): Promise<CommonHTTPStatus> {
+        return await this.getInstance().post('api/common/addQuestion', pvo)
     }
 }

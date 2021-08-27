@@ -1,11 +1,10 @@
 import store from '@/stores/index'
 
 import { getModule, Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import LoginService, { LoginPVO, LoginRVO, CountRVO } from '@/services/main/login'
+import LoginService, { LoginPVO, LoginRVO, CountRVO, QuestionVO, GetQuestionListPVO, AddQuestionPVO, GetQuestionListRVO } from '@/services/main/login'
 
 @Module({ dynamic: true, name: 'loginStore', namespaced: true, store })
 export default class LoginStore extends VuexModule {
-    private loginService = new LoginService()
     loginResult = false
     nickname? = ''
     loginId = ''
@@ -15,17 +14,22 @@ export default class LoginStore extends VuexModule {
 
     @Action({ commit: 'setLoginInfos', rawError: true })
     async chkLogin(pvo: LoginPVO) {
-        return await this.loginService.login(pvo) // 여긴 서버 API 통신 함수 호출
+        return await new LoginService().login(pvo) // 여긴 서버 API 통신 함수 호출
     }
 
     @Action({ commit: 'setCounts', rawError: true })
     async getCount() {
-        return await this.loginService.getCount() // 여긴 서버 API 통신 함수 호출
+        return await new LoginService().getCount() // 여긴 서버 API 통신 함수 호출
     }
 
     @Action({ commit: 'getQuestionListInfos', rawError: true })
     async getQuestionList(pvo: GetQuestionListPVO) {
-        return await this.restSample.getQuestionList(pvo)
+        return await new LoginService().getQuestionList(pvo)
+    }
+
+    @Action
+    async addQuestion(pvo: AddQuestionPVO) {
+        return await new LoginService().addQuestion(pvo)
     }
 
     @Mutation
@@ -47,12 +51,10 @@ export default class LoginStore extends VuexModule {
     getQuestionListInfos(rvo: GetQuestionListRVO) {
         if (rvo.Status?.code === 200) {
             this.questionList = rvo.questionList
-        }
-        else {
+        } else {
             console.log(`getQuestionList API RESULT :: ${rvo.Status.code}`)
         }
     }
-
 
     @Mutation
     setCounts(countRVO: CountRVO) {

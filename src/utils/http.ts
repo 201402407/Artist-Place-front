@@ -15,6 +15,10 @@ export interface Status {
     message: string
 }
 
+export interface CommonHTTPStatus {
+    Status?: Status
+}
+
 export type RestServiceResponse<T> = Promise<T | null>
 export class HttpService {
     // 싱글톤 패턴으로 axios Instance에 환경 설정

@@ -13,7 +13,7 @@ import { NicknameModule } from '@/stores/modules/main/nickname'
 import { LoginModule } from '@/stores/modules/main/login'
 import { Vue, Component } from 'vue-property-decorator'
 import { RegistNicknamePVO } from '@/services/main/nickname'
-import cloneDeep from 'lodash/cloneDeep'
+// import cloneDeep from 'lodash/cloneDeep'
 
 @Component
 export default class RegistNickname extends Vue {

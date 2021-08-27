@@ -1,4 +1,4 @@
-import { HttpService, RestServiceResponse, Status } from '@/utils/http'
+import { HttpService, Status } from '@/utils/http'
 // import { AxiosResponse } from "axios"
 
 export interface CreateCrewPVO {
