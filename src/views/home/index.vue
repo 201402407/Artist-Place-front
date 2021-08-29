@@ -13,7 +13,7 @@
         <h3>{{ this.getNowQuestion.problemName }}</h3>
         <br />
         <button @click="showAnswer">정답 펼치기/숨기기</button><br />
-        <h3 v-show="this.isShowAnswer">{{ this.answer }}</h3>
+        <span v-show="this.isShowAnswer">{{ this.answer }}</span>
         <br />
         <input v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
         <input v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
@@ -47,7 +47,7 @@ export default class Home extends Vue {
     isShowAnswer = false
 
     created() {
-        console.log('11')
+        console.log('12')
         this.getProblemList()
     }
 

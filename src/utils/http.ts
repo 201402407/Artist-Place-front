@@ -26,23 +26,23 @@ export class HttpService {
 
     constructor() {
         this.instance = axios.create({
+            withCredentials: true,
             baseURL: process.env.VUE_APP_API_URL,
             headers: {
                 // "Cache-Control": "no-cache",
                 'Content-Type': 'application/json',
-                // "Content-Type": "application/json;charset=utf-8",
-                'Access-Control-Allow-Headers': 'Content-Type, Accept, X-Requested-With',
+                // 'Content-Type': 'application/json;charset=utf-8',
+                // 'Access-Control-Allow-Headers': 'Accept, Origin, Content-Type, authorization',
                 // 'Access-Control-Allow-Origin': process.env.VUE_APP_API_URL,
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
             },
             adapter: throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter)),
-            withCredentials: true,
             // transformResponse: this.getTransformResponse(),
         })
         // axios.defaults.headers["Content-Type"] =
-        //     "application/json;charset=utf-8"
+        //     "application/json"
         // axios.defaults.headers["Access-Control-Allow-Origin"] = "*"
-        // axios.defaults.headers["Access-Control-Allow-Headers"] = "*"
+        // axios.defaults.headers["Access-Control-Allow-Headers"] = "Accept, Origin, Content-Type, authorization"
 
         this.getInstance().interceptors.response.use(
             function(response) {
