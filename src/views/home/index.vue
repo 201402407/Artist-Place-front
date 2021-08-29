@@ -13,8 +13,8 @@
         <span v-show="this.isShowAnswer">{{ this.answer }}</span>
         <br /><br />
         <input style="margin: 10px; width: 80%;" v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
-        <input style="margin: 10px; width: 80%; height: 50px;" v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
-        <input style="margin: 10px; width: 80%; height: 100px;" v-model="newQuestion.answer" type="text" placeholder="문제 정답(입력안해도됨)" /><br />
+        <textarea style="margin: 10px; width: 80%; height: 50px;" v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
+        <textarea style="margin: 10px; width: 80%; height: 100px;" v-model="newQuestion.answer" type="text" placeholder="문제 정답(입력안해도됨)" /><br />
         <button @click="addQuestion" :disabled="!isChanged">문제 추가하기</button><br /><br />
     </div>
 </template>
