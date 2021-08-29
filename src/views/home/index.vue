@@ -42,6 +42,7 @@ export default class Home extends Vue {
     isAdded = false
 
     created() {
+        console.log('11')
         this.getProblemList()
     }
 
