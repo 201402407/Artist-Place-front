@@ -20,6 +20,7 @@ export interface AddQuestionPVO {
     type: number
     problemName: string
     state?: number
+    answer?: string
 }
 
 export interface LoginResult {
@@ -47,6 +48,7 @@ export interface QuestionVO {
     type: number
     problemName: string
     state: number
+    answer?: string
 }
 
 // 서비스 로직 단 구현

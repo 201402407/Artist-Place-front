@@ -3,7 +3,7 @@
         <h1>QUESTION</h1>
         <br /><br />
         <h3>문제 수 : {{ questionSize }}</h3>
-        <br /><br />
+        <br />
         <button @click="getQuestion">문제 하나 뽑기</button><br /><br />
         <h3>문제 유형 : {{ getType }}</h3>
         <h3>문제 풀이 상태 : {{ getState }}</h3>
@@ -11,9 +11,13 @@
         <h2>~ 문제 ~</h2>
         <br />
         <h3>{{ this.getNowQuestion.problemName }}</h3>
-        <br /><br />
+        <br />
+        <button @click="showAnswer">정답 펼치기/숨기기</button><br />
+        <h3 v-show="this.isShowAnswer">{{ this.answer }}</h3>
+        <br />
         <input v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
         <input v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
+        <input v-model="newQuestion.answer" type="text" placeholder="문제 정답(입력안해도됨)" /><br />
         <button @click="addQuestion" :disabled="!isChanged">문제 추가하기</button><br /><br />
     </div>
 </template>
@@ -40,6 +44,7 @@ export default class Home extends Vue {
     }
 
     isAdded = false
+    isShowAnswer = false
 
     created() {
         console.log('11')
@@ -52,6 +57,10 @@ export default class Home extends Vue {
 
     get getNowQuestion() {
         return this.nowQuestion
+    }
+
+    get answer() {
+        return this.nowQuestion.answer ? this.nowQuestion.answer : '정답 미입력!'
     }
 
     get getType() {
@@ -85,9 +94,14 @@ export default class Home extends Vue {
         // this.loginResultMsg = this.loginResult ? '로그인 성공' : '로그인 실패'
     }
 
+    showAnswer() {
+        this.isShowAnswer = !this.isShowAnswer
+    }
+
     getQuestion() {
         const index = this.getRandomInt(0, this.questionSize)
         this.nowQuestion = this.questionList[index]
+        this.isShowAnswer = false
     }
 
     async addQuestion() {
