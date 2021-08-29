@@ -1,23 +1,20 @@
 <template>
     <div>
         <h1>QUESTION</h1>
-        <br /><br />
         <h3>문제 수 : {{ questionSize }}</h3>
         <br />
-        <button @click="getQuestion">문제 하나 뽑기</button><br /><br />
+        <button @click="getQuestion">문제 하나 뽑기</button><br />
         <h3>문제 유형 : {{ getType }}</h3>
         <h3>문제 풀이 상태 : {{ getState }}</h3>
-        <br /><br /><br /><br />
+        <br /><br />
         <h2>~ 문제 ~</h2>
-        <br />
         <h3>{{ this.getNowQuestion.problemName }}</h3>
-        <br />
-        <button @click="showAnswer">정답 펼치기/숨기기</button><br />
+        <button @click="showAnswer">정답 펼치기/숨기기</button><br /><br />
         <span v-show="this.isShowAnswer">{{ this.answer }}</span>
-        <br />
-        <input v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
-        <input v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
-        <input v-model="newQuestion.answer" type="text" placeholder="문제 정답(입력안해도됨)" /><br />
+        <br /><br />
+        <input style="margin: 10px; width: 80%;" v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
+        <input style="margin: 10px; width: 80%; height: 50px;" v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
+        <input style="margin: 10px; width: 80%; height: 100px;" v-model="newQuestion.answer" type="text" placeholder="문제 정답(입력안해도됨)" /><br />
         <button @click="addQuestion" :disabled="!isChanged">문제 추가하기</button><br /><br />
     </div>
 </template>
