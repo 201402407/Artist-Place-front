@@ -10,7 +10,7 @@
         <h2>~ 문제 ~</h2>
         <h3>{{ this.getNowQuestion.problemName }}</h3>
         <button @click="showAnswer">정답 펼치기/숨기기</button><br /><br />
-        <span v-show="this.isShowAnswer">{{ this.answer }}</span>
+        <span style="font-size: 12px;" v-show="this.isShowAnswer">{{ this.answer }}</span>
         <br /><br />
         <input style="margin: 10px; width: 80%;" v-model="newQuestion.type" type="text" placeholder="문제 유형 입력(1: 기술, 2: 인성)" /><br />
         <textarea style="margin: 10px; width: 80%; height: 50px;" v-model="newQuestion.problemName" type="text" placeholder="문제 내용" /><br />
