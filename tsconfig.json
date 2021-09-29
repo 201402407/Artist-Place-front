@@ -1,29 +1,38 @@
 {
     "compilerOptions": {
-        "experimentalDecorators": true,
-        "target": "es5",
-        "module": "esnext",
-        "strict": true,
-        "jsx": "preserve",
-        "importHelpers": true,
-        "moduleResolution": "node",
-        "allowJs": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
-        "baseUrl": ".",
+        /* DEFAULT 옵션 */
+        "target": "es5", // 사용할 특정 ECMA Scprint 버전 설정
+        "module": "esnext", // 컴파일 모듈 / LOCA에서는 Common.js를 사용했는데, 레거시느낌(https://www.tsmean.com/articles/learn-typescript/typescript-module-compiler-option/)
+        "jsx": "preserve", // JSX 코드 생성 설정
+        "importHelpers": true, // tslib에서 적용된 헬퍼를 import (__extends, __reset 등)
+        "sourceMap": true, // .map 파일 생성 여부
+
+        /* 엄격한 타입 - 확장 옵션 */
+        "strict": true, // 모든 엄격한 타입 - 체킹 옵션 활성화 여부
+        "strictNullChecks": true, // 변수 타입에 NULL, undefined 를 서브타입으로 사용 불가
+        "noImplicitAny": true, // any 타입으로 구현된 표현식 또는 정의 에러처리 여부
+        "noImplicitThis": true, // any 타입으로 구현된 this 표현식 에러처리 여부
+        "alwaysStrict": true, // 항상 strict mode로 분석하고 모든 소스파일에 "use strict"를 추가할지 여부
+
+        /* 모듈 해석 옵션 */
+        "moduleResolution": "node", // 모듈 해석 방법 설정
+        "esModuleInterop": true, // 모든 imports에 대한 namespace 생성을 통해 CommonJS와 ES Modules 간의 상호 운용성 여부
+        "allowSyntheticDefaultImports": true, // default export가 아닌 모듈에서도 default import가 가능할 지 여부, 해당 설정은 type check에만 영향을 줌
+        "downlevelIteration": true,
+        "baseUrl": ".", // non-absolute 한 모듈 이름을 처리할 기준 directory(public, src 등)
+
+        /* 추가 옵션 */
+        "experimentalDecorators": true, // ES Decorator 사용 여부
+        "skipLibCheck": true, // 정의 파일의 타입 확인을 건너뛸 지 여부
+
+        "resolveJsonModule": true,
+        "removeComments": true,
         "types": ["webpack-env"],
         "paths": {
             "@/*": ["src/*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "tests/**/*.ts",
-        "tests/**/*.tsx"
-    ],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
     "exclude": ["node_modules"]
 }

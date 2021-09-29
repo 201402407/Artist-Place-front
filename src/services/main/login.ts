@@ -69,4 +69,9 @@ export default class LoginService extends HttpService {
     async addQuestion(pvo: AddQuestionPVO): Promise<CommonHTTPStatus> {
         return await this.getInstance().post('api/common/addQuestion', pvo)
     }
+
+    // 테스트
+    async temp(): Promise<string[]> {
+        return await this.getInstance().get('./device.json')
+    }
 }

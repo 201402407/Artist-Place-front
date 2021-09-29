@@ -19,6 +19,7 @@ import { LoginModule } from '@/stores/modules/main/login'
 import { LoginPVO } from '@/services/main/login'
 import { Vue, Component } from 'vue-property-decorator'
 import { EnvUtils } from '@/utils/envUtils'
+import axios from 'axios'
 
 @Component
 export default class Main extends Vue {
@@ -28,6 +29,18 @@ export default class Main extends Vue {
     private pvo: LoginPVO = {
         emailId: '',
         pwd: '',
+    }
+
+    async mounted() {
+        // const result = await new LoginService().temp()
+        // console.log(result)
+        axios
+            .get('https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json')
+            .then((res) => {
+                const a = res.data
+                console.log(a)
+            })
+            .catch((e) => {})
     }
 
     get countResult() {
