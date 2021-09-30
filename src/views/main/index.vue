@@ -1,6 +1,6 @@
 <!-- 메인화면 -->
 <template>
-    <div>
+    <div ref="temp">
         <input v-model="pvo.emailId" type="text" placeholder="ID 입력" /><br />
         <input v-model="pwdInput" type="password" placeholder="PWD 입력" @keyup.enter="clickLogin" /><br />
         <button @click="clickLogin">로그인</button><br /><br />
@@ -17,12 +17,19 @@
 <script lang="ts">
 import { LoginModule } from '@/stores/modules/main/login'
 import { LoginPVO } from '@/services/main/login'
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Ref } from 'vue-property-decorator'
 import { EnvUtils } from '@/utils/envUtils'
-import axios from 'axios'
+// import axios from 'axios'
+
+declare global {
+    interface Window {
+        device: string
+    }
+}
 
 @Component
 export default class Main extends Vue {
+    @Ref('temp') temp!: HTMLElement
     private count = ''
     private pwdInput = ''
     private loginResultMsg = ''
@@ -34,13 +41,23 @@ export default class Main extends Vue {
     async mounted() {
         // const result = await new LoginService().temp()
         // console.log(result)
-        axios
-            .get('https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json')
-            .then((res) => {
-                const a = res.data
-                console.log(a)
-            })
-            .catch((e) => {})
+        // axios
+        //     .get('https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json')
+        //     .then((res) => {
+        //         const a = res.data
+        //         console.log(a)
+        //     })
+        //     .catch((e) => {})
+
+        // try {
+        //     const result = await this.loadFile('https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json')
+        //     console.log(result)
+        // } catch (status) {
+        //     console.log(status)
+        // }
+        await this.loadScriptFile('https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json')
+        // result.preventDefault()
+        console.log(window.device)
     }
 
     get countResult() {
@@ -55,6 +72,47 @@ export default class Main extends Vue {
         return LoginModule.nickname
     }
 
+    // async loadFile(url: string) {
+    //     return new Promise((resolve, reject) => {
+    //         const req = new XMLHttpRequest()
+    //         req.open('GET', url)
+    //         req.onload = () => {
+    //             if (req.status === 200) {
+    //                 resolve(req.response)
+    //             } else {
+    //                 reject('삼성페이 기기 script Error Code : ' + req.statusText)
+    //             }
+    //         }
+
+    //         req.send()
+    //     })
+    // }
+
+    async loadScriptFile(url: string): Promise<Event> {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script')
+            script.type = 'text/javascript'
+            script.onload = resolve
+            script.onerror = reject
+            script.async = true
+            script.src = url
+
+            document.head.appendChild(script)
+            // script.onload = (script) => {
+            //     //
+            //     console.log(`${script} is loaded!`)
+            //     console.log(script)
+            //     resolve(callback)
+            // }
+
+            return
+        })
+    }
+
+    temp2(event: Event) {
+        //
+        console.log('EVENET ' + event)
+    }
     async clickLogin() {
         this.pvo.pwd = EnvUtils.hashing(this.pwdInput)
         await LoginModule.chkLogin(this.pvo)
